@@ -20,7 +20,6 @@
   1. Manajemen Properti: Pendataan properti (rumah/apartemen) dengan detail spesifik seperti alamat, harga sewa, dan karakteristik unik (jumlah kamar/lantai).
   2. Manajemen Penyewa: Penyimpanan informasi penyewa beserta kontak dan riwayat transaksi.
   3. Transaksi Sewa: Pembuatan kontrak sewa, perhitungan otomatis (harga sewa + pajak), dan pelacakan pembayaran.
-  4. Laporan Keuangan: Generasi laporan bulanan/tahunan untuk analisis bisnis.
 
 Dibangun dengan menerapkan  **Inheritance**, **Polymorphism**, **Encapsulation**, dan **Abstraction** pada sistem aplikasi ini, sistem ini mengintegrasikan database MySQL untuk penyimpanan data yang andal.</p>
 
