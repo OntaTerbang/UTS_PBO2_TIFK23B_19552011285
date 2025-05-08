@@ -94,14 +94,29 @@ Validasi dilakukan di setter untuk menjaga integritas data.
 **Implementasi dalam Aplikasi:**
 
 ```java
-public Penyewa(int id, String nama, String kontak) {
+public class Penyewa {
+     private int id;
+    private String nama;
+    private String kontak;
+
+    public Penyewa(int id, String nama, String kontak) {
         this.id = id;
         setNama(nama);
         setKontak(kontak);
     }
 
-   // Encapsulation
-     public int getId() {
+    public Penyewa(int id, String nama, String kontak, boolean skipValidation) {
+        this.id = id;
+        if (skipValidation) {
+            this.nama = nama;
+            this.kontak = kontak;
+        } else {
+            setNama(nama);
+            setKontak(kontak);
+        }
+    }
+
+    public int getId() {
         return id;
     }
 
@@ -126,9 +141,6 @@ public Penyewa(int id, String nama, String kontak) {
         }
         if (!kontak.matches("\\d+")) {
             throw new IllegalArgumentException("Kontak hanya boleh angka.");
-        }
-        if (kontak.length() < 10 || kontak.length() > 13) {
-            throw new IllegalArgumentException("Kontak harus terdiri dari 10-13 digit.");
         }
         this.kontak = kontak;
     }
