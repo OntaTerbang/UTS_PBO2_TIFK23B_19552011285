@@ -167,17 +167,25 @@ private static Scanner scanner = new Scanner(System.in);
     }
     
     private static void tambahPenyewa() {
+        while (true) {
         System.out.println("\n=== Tambah Penyewa ===");
+
         System.out.print("Nama: ");
         String nama = scanner.nextLine();
-        
+
         System.out.print("Kontak: ");
         String kontak = scanner.nextLine();
-        
-        Penyewa penyewa = new Penyewa(0, nama, kontak);
-        penyewaDAO.addPenyewa(penyewa);
-        System.out.println("Penyewa berhasil ditambahkan!");
+
+        try {
+            Penyewa penyewa = new Penyewa(0, nama, kontak);
+            penyewaDAO.addPenyewa(penyewa);
+            System.out.println("Penyewa berhasil ditambahkan!");
+            break;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
+}
     
     private static void lihatPenyewa() {
         System.out.println("\n=== Daftar Penyewa ===");

@@ -29,7 +29,7 @@ public class PenyewaDAO {
             ps.setString(2, penyewa.getKontak());
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+           System.out.println("Gagal menambahkan penyewa ke database: " + e.getMessage());
         }
     }
     

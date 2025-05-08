@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -54,7 +54,7 @@ public class Transaksi {
         System.out.println("ID Transaksi: " + id);
         System.out.println("Tanggal: " + tanggalTransaksi);
         System.out.println("Durasi (bulan): " + durasi);
-        System.out.println("Total: " + total);
+        System.out.println("Total: Rp" + total);
         System.out.println("\nDetail Properti:");
         properti.displayInfo();
         System.out.println("\nDetail Penyewa:");

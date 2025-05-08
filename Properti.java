@@ -40,6 +40,6 @@ public abstract class Properti extends Aset {
         System.out.println("ID: " + id);
         System.out.println("Jenis: " + jenis);
         System.out.println("Alamat: " + alamat);
-        System.out.println("Harga Sewa: " + hargaSewa);
+        System.out.println("Harga Sewa: Rp " + hargaSewa);
     }
 }

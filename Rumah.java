@@ -33,6 +33,6 @@ public class Rumah extends Properti {
         System.out.println("Alamat: " + alamat);
         System.out.println("Harga Sewa: " + hargaSewa);
         System.out.println("Jumlah Kamar: " + jumlahKamar);
-        System.out.println("Pajak: " + hitungPajak());
+        System.out.println("Pajak: Rp" + hitungPajak());
     }
 }
