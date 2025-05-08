@@ -26,7 +26,21 @@ Dibangun dengan menerapkan  **Inheritance**, **Polymorphism**, **Encapsulation**
 ## Penjelasan 4 Pilar OOP dalam Studi Kasus
 
 ### 1. Inheritance (Pewarisan)
-<p>Membuat hierarki kelas di mana kelas anak mewarisi atribut/method dari kelas parent.
+<p>Inheritance memungkinkan kelas anak mewarisi atribut dan method dari kelas induk. Pada proyek ini:
+<ul>
+  <li>
+    
+`Aset` adalah kelas abstrak induk.
+</li>
+<li>
+  
+`Properti` mewarisi dari Aset.
+</li>
+<li>
+  
+`Rumah` dan `Apartemen` mewarisi dari `Properti`.
+</li>
+</ul>
   
 **Implementasi dalam Aplikasi:**
 
@@ -57,51 +71,89 @@ public class Apartemen extends Properti {
 ```
 **Manfaat:**
 <ul>
-   <li>Efisiensi Kode: Hindari duplikasi kode untuk atribut umum.</li>
-  <li>Organisasi Logis: Relasi "is-a" jelas (Rumah adalah Properti, Properti adalah Aset).</li>
+   <li>Menghindari duplikasi kode (reuse).</li>
+  <li>Mempermudah ekspansi dan pengelolaan tipe properti baru.</li>
+  <li>Meningkatkan struktur dan organisasi kode.</li>
 </ul>
 </p>
 
 ### 2. Encapsulation (Enkapsulasi)
-<p>Membungkus data dan method terkait dalam satu unit (kelas), dan membatasi akses langsung ke data.
+<p>Encapsulation menyembunyikan data dan hanya mengizinkan akses melalui getter dan setter. Pada proyek ini:
+
+<ul>
+  <li>
+    
+Kelas `Penyewa` menyimpan data pribadi (seperti nama dan kontak) secara privat.
+</li>
+<li>
+  
+Validasi dilakukan di setter untuk menjaga integritas data.
+</li>
+</ul>
 
 **Implementasi dalam Aplikasi:**
 
 ```java
-public class Penyewa {
-    private int id;
-    private String nama;
-    private String kontak;
-    
-    public Penyewa(int id, String nama, String kontak) {
+public Penyewa(int id, String nama, String kontak) {
         this.id = id;
-        this.nama = nama;
-        this.kontak = kontak;
+        setNama(nama);
+        setKontak(kontak);
     }
-    
-    // Encapsulation
-    public int getId() {
+
+   // Encapsulation
+     public int getId() {
         return id;
     }
-    
+
     public String getNama() {
         return nama;
     }
-    
+
     public String getKontak() {
         return kontak;
     }
+
+    public void setNama(String nama) {
+        if (nama == null || nama.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nama tidak boleh kosong.");
+        }
+        this.nama = nama;
+    }
+
+    public void setKontak(String kontak) {
+        if (kontak == null || kontak.trim().isEmpty()) {
+            throw new IllegalArgumentException("Kontak tidak boleh kosong.");
+        }
+        if (!kontak.matches("\\d+")) {
+            throw new IllegalArgumentException("Kontak hanya boleh angka.");
+        }
+        if (kontak.length() < 10 || kontak.length() > 13) {
+            throw new IllegalArgumentException("Kontak harus terdiri dari 10-13 digit.");
+        }
+        this.kontak = kontak;
+    }
+
 ```
 **Manfaat:**
 <ul>
-   <li>Kesalahan dicegah: Developer tidak bisa mengubah nama sembarangan tanpa validasi.</li>
-  <li>Konsistensi data: Nilai id, nama, dan kontak tetap valid sejak objek dibuat.</li>
+   <li>Melindungi data sensitif dari akses langsung.</li>
+  <li>Memastikan data valid melalui validasi input.</li>
+  <li>Mengurangi risiko bug akibat manipulasi langsung terhadap variabel internal.
+
+</li>
 </ul>
 
 </p>
 
 ### 3. Polymorphism (Polimorfisme)
-<p>Kemampuan objek untuk merespon method yang sama dengan cara berbeda.
+<p>Polymorphism memungkinkan method yang sama berperilaku berbeda tergantung objeknya. Pada proyek ini:
+<ul>
+  <li>
+    
+`hitungPajak()` diimplementasikan secara berbeda di kelas `Rumah` dan `Apartemen`.
+</li>
+</ul>
+
   
 **Implementasi dalam Aplikasi:**
 ```java
@@ -122,13 +174,24 @@ public double hitungPajak() {
 ```
 **Manfaat:**
 <ul>
-   <li>Fleksibilitas: Logika spesifik tiap jenis properti terpisah.</li>
-  <li>Kemudahan Ekstensi: Tambah jenis properti baru tanpa ubah kode utama.</li>
+   <li>Mempermudah pengelolaan objek berbeda dalam satu interface umum.</li>
+  <li>Memudahkan pengembangan dan integrasi fitur baru.</li>
+  <li>Meningkatkan fleksibilitas dan skalabilitas aplikasi.</li>
 </ul>
 </p>
 
 ### 4. Abstract (Abstraksi)
-<p>Menyembunyikan detail kompleks dan hanya menampilkan fungsionalitas esensial.
+<p>Abstraction menyembunyikan detail implementasi dan hanya menampilkan fungsi penting. Pada proyek ini:
+<ul>
+  <li>
+    
+`Aset` mendeklarasikan method abstrak `displayInfo()`.
+</li>
+<li>
+  
+Implementasi detail dilakukan di kelas turunannya (`Properti`).
+</li>
+</ul>
 
 **Implementasi dalam Aplikasi:**
 ```java
