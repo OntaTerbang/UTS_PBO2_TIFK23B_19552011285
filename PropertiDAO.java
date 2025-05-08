@@ -101,4 +101,20 @@ public class PropertiDAO {
         }
         return properti;
     }
+    public void deleteProperti(int id) {
+        try {
+            String query = "DELETE FROM properti WHERE id = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            int rows = ps.executeUpdate();
+
+            if (rows > 0) {
+                System.out.println("Properti berhasil dihapus.");
+            } else {
+                System.out.println("Properti dengan ID tersebut tidak ditemukan.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Gagal menghapus properti: " + e.getMessage());
+        }
+    }
 }

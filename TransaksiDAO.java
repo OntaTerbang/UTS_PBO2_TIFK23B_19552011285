@@ -46,7 +46,7 @@ public class TransaksiDAO {
             String query = "SELECT * FROM transaksi";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 int id = rs.getInt("id");
                 int propertiId = rs.getInt("properti_id");
@@ -54,7 +54,7 @@ public class TransaksiDAO {
                 int durasi = rs.getInt("durasi");
                 double total = rs.getDouble("total");
                 LocalDate tanggal = rs.getDate("tanggal").toLocalDate();
-                
+
                 Transaksi transaksi = new Transaksi(
                     id, 
                     propertiDAO.getPropertiById(propertiId), 
@@ -68,5 +68,19 @@ public class TransaksiDAO {
             e.printStackTrace();
         }
         return transaksiList;
+    }
+     public void deleteTransaksi(int id) {
+        try {
+        String query = "DELETE FROM transaksi WHERE id = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, id);
+        int rowsAffected = ps.executeUpdate();
+        
+        if (rowsAffected == 0) {
+            System.out.println("Transaksi dengan ID tersebut tidak ditemukan.");
+        }
+    } catch (SQLException e) {
+        System.out.println("Gagal menghapus transaksi: " + e.getMessage());
+        }
     }
 }

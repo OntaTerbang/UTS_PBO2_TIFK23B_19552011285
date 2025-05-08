@@ -9,7 +9,7 @@ package com.mycompany.kasirproperti;
  * @author Fadil
  */
 public class Penyewa {
-    private int id;
+     private int id;
     private String nama;
     private String kontak;
 
@@ -19,8 +19,18 @@ public class Penyewa {
         setKontak(kontak);
     }
 
-   // Encapsulation
-     public int getId() {
+    public Penyewa(int id, String nama, String kontak, boolean skipValidation) {
+        this.id = id;
+        if (skipValidation) {
+            this.nama = nama;
+            this.kontak = kontak;
+        } else {
+            setNama(nama);
+            setKontak(kontak);
+        }
+    }
+
+    public int getId() {
         return id;
     }
 
@@ -45,9 +55,6 @@ public class Penyewa {
         }
         if (!kontak.matches("\\d+")) {
             throw new IllegalArgumentException("Kontak hanya boleh angka.");
-        }
-        if (kontak.length() < 10 || kontak.length() > 13) {
-            throw new IllegalArgumentException("Kontak harus terdiri dari 10-13 digit.");
         }
         this.kontak = kontak;
     }

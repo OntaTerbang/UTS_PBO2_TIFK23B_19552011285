@@ -29,7 +29,7 @@ public class PenyewaDAO {
             ps.setString(2, penyewa.getKontak());
             ps.executeUpdate();
         } catch (SQLException e) {
-           System.out.println("Gagal menambahkan penyewa ke database: " + e.getMessage());
+           System.out.println("Gagal menambahkan penyewa ke database: " + e.getMessage()); 
         }
     }
     
@@ -39,12 +39,12 @@ public class PenyewaDAO {
             String query = "SELECT * FROM penyewa";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String nama = rs.getString("nama");
                 String kontak = rs.getString("kontak");
-                penyewaList.add(new Penyewa(id, nama, kontak));
+                penyewaList.add(new Penyewa(id, nama, kontak, true)); // skip validasi
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -59,15 +59,31 @@ public class PenyewaDAO {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            
+
             if (rs.next()) {
                 String nama = rs.getString("nama");
                 String kontak = rs.getString("kontak");
-                penyewa = new Penyewa(id, nama, kontak);
+                penyewa = new Penyewa(id, nama, kontak, true); // skip validasi
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return penyewa;
-    }  
+    }
+    
+    public void hapusPenyewa(int id) {
+        try {
+            String query = "DELETE FROM penyewa WHERE id = ?";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Penyewa berhasil dihapus.");
+            } else {
+                System.out.println("Penyewa tidak ditemukan.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Gagal menghapus penyewa: " + e.getMessage());
+        }
+    }
 }

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package com.mycompany.kasirproperti;
 import com.mycompany.kasirproperti.PenyewaDAO;
 import com.mycompany.kasirproperti.PropertiDAO;
@@ -144,7 +141,8 @@ private static Scanner scanner = new Scanner(System.in);
             System.out.println("\n=== Kelola Penyewa ===");
             System.out.println("1. Tambah Penyewa");
             System.out.println("2. Lihat Daftar Penyewa");
-            System.out.println("3. Kembali");
+            System.out.println("3. Hapus Penyewa");
+            System.out.println("4. Kembali");
             System.out.print("Pilih menu: ");
             
             int choice = scanner.nextInt();
@@ -158,6 +156,9 @@ private static Scanner scanner = new Scanner(System.in);
                     lihatPenyewa();
                     break;
                 case 3:
+                    hapusPenyewa();
+                    break;
+                case 4:
                     back = true;
                     break;
                 default:
@@ -208,7 +209,8 @@ private static Scanner scanner = new Scanner(System.in);
             System.out.println("\n=== Kelola Transaksi ===");
             System.out.println("1. Buat Transaksi Sewa");
             System.out.println("2. Lihat Daftar Transaksi");
-            System.out.println("3. Kembali");
+            System.out.println("3. Hapus Transaksi");
+            System.out.println("4. Kembali");
             System.out.print("Pilih menu: ");
             
             int choice = scanner.nextInt();
@@ -222,6 +224,9 @@ private static Scanner scanner = new Scanner(System.in);
                     lihatTransaksi();
                     break;
                 case 3:
+                     hapusTransaksi();
+                     break;
+                case 4:
                     back = true;
                     break;
                 default:
@@ -288,5 +293,40 @@ private static Scanner scanner = new Scanner(System.in);
             }
         }
     }
-    
+
+    private static void hapusPenyewa() {
+      System.out.println("\n=== Hapus Penyewa ===");
+    lihatPenyewa();
+
+    System.out.print("Masukkan ID penyewa yang ingin dihapus: ");
+    int id = scanner.nextInt();
+    scanner.nextLine(); // newline
+
+    Penyewa penyewa = penyewaDAO.getPenyewaById(id);
+    if (penyewa == null) {
+        System.out.println("Penyewa tidak ditemukan.");
+        return;
+    }
+
+    System.out.print("Yakin ingin menghapus penyewa ini? (y/n): ");
+    String confirm = scanner.nextLine();
+
+    if (confirm.equalsIgnoreCase("y")) {
+        penyewaDAO.hapusPenyewa(id);
+    } else {
+        System.out.println("Penghapusan dibatalkan.");
+    }
+  }
+
+    private static void hapusTransaksi() {
+        System.out.println("\n=== Hapus Transaksi ===");
+    lihatTransaksi(); 
+
+    System.out.print("Masukkan ID Transaksi yang akan dihapus: ");
+    int id = scanner.nextInt();
+    scanner.nextLine();
+
+    transaksiDAO.deleteTransaksi(id);
+    System.out.println("Transaksi berhasil dihapus.");
+    }
 }
